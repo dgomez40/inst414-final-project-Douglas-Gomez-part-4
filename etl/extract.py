@@ -21,7 +21,7 @@ def air_pollutant():
 def weather():
     logger.info("creating temperature csv")
     url = 'https://www.ncei.noaa.gov/data/daily-summaries/access/USW00093721.csv'
-    temperature_raw = pd.read_csv(url)
+    temperature_raw = pd.read_csv(url, low_memory=False)
     # print(temperature_raw)
     temperature_raw["DATE"] = pd.to_datetime(temperature_raw["DATE"])
     temperature_raw = temperature_raw[temperature_raw["DATE"].dt.year == 2024]

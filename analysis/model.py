@@ -14,8 +14,6 @@ def train_lin_reg(train_X_scaled, y_train, test_X_scaled, y_test ):
     'Predicted_AQI': y_pred.ravel()     
 })
     joblib.dump(lr_model, 'data/models/linear_regression_model.joblib')
-    results.to_csv("data/results.csv")
-
     return lr_model, train_X_scaled, test_X_scaled, y_train, y_test, y_pred
 
 

@@ -4,6 +4,8 @@ import etl.extract as extract
 import etl.transform as transform
 import etl.load as load
 import analysis.model as model
+import analysis.evaluate as eval
+import vis.visualizations as vis
 logger = logging.getLogger(__name__)
 
 def main():
@@ -52,9 +54,22 @@ def main():
 
         #LOADING
 
-        # logger.info("attempting to load data")
+        logger.info("attempting to load data")
         load.load_data(X_train_scaled, X_test_scaled, y_train, y_test, y_pred, lr_model)
-        # logger.info("finished loading data.")
+        logger.info("finished loading data.")
+
+
+        #EVALUATING
+        logger.info("evaluating model and creating metrics")
+        eval.evaluate_model(X_test_scaled, y_test)
+        logger.info("finished creating metrics")
+
+
+        #VISUALIZATION
+        logger.info("Creating plot(s)")
+        vis.create_linreg_Scatter(y_test,y_pred)
+        logger.info("visualization created successfully.")
+
 
 
 
