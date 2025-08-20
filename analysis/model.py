@@ -5,25 +5,17 @@ from sklearn.metrics import r2_score
 import joblib
 
 
-def read_in():
-    #read in
-    pollutant = pd.read_csv('pollutant_merge_polished.csv')
-    return pollutant
-
-
-def target_and_split(pollutant):
-    #trains and returns the model
-    x = pollutant[['temperature']]
-    y = pollutant[['pm2.5']]
-
-    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = .2, random_state = 1)
-
+def train_lin_reg(train_X_scaled, y_train, test_X_scaled, y_test ):
     lr_model = LinearRegression()
+    lr_model.fit(train_X_scaled, y_train)
+    y_pred = lr_model.predict(test_X_scaled)
+    results = pd.DataFrame({
+    'Actual_AQI': y_test.values.ravel(), 
+    'Predicted_AQI': y_pred.ravel()     
+})
+    joblib.dump(lr_model, 'data/models/linear_regression_model.joblib')
+    results.to_csv("data/results.csv")
 
-    lr_model.fit(x_train, y_train)
-
-    joblib.dump(lr_model, 'data/lr_model.pkl')
-
-    return x_test, y_test, lr_model
+    return lr_model, train_X_scaled, test_X_scaled, y_train, y_test, y_pred
 
 

@@ -4,7 +4,7 @@ import etl.extract as extract
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
-
+import joblib
 
 
 
@@ -66,6 +66,8 @@ def outliers():
     pollutant_merge.to_csv('data/pollutant_merge.csv')
     #removes 2 rows basically
 
+#up to here, since just tidy
+
 
 #since linear regression is sensitive to feature scale, I am also going to normalize the data as well.
 def split_into_train_and_test():
@@ -87,36 +89,3 @@ def normalize_features(X_train, X_test):
     train_X_scaled = pd.DataFrame(scaler.fit_transform(X_train), columns=X_train.columns, index=X_train.index)
     test_X_scaled = pd.DataFrame(scaler.transform(X_test), columns=X_test.columns, index=X_test.index)
     return train_X_scaled, test_X_scaled, scaler
-
-def train_lin_reg():
-    X, y = split_into_train_and_test()
-    X_train, X_test, y_train, y_test = split_train_test_data(X,y)
-    X_train_scaled, X_test_scaled, scaler = normalize_features(X_train, X_test)
-
-    model = LinearRegression()
-    model.fit(X_train_scaled, y_train)
-    y_pred = model.predict(X_test_scaled)
-    results = pd.DataFrame({
-    'Actual_AQI': y_test.values.ravel(), 
-    'Predicted_AQI': y_pred.ravel()     
-})
-    # print(results)
-    return model, X_train_scaled, X_test_scaled, y_train, y_test, y_pred
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

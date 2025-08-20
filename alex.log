@@ -1,0 +1,16 @@
+INFO:__main__:started creating raw CSVs for pm25 and temperature
+INFO:etl.extract:creating air_pollutant
+INFO:etl.extract:creating temperature csv
+INFO:__main__:Finished creating raw CSVs
+INFO:__main__:starting merge
+INFO:__main__:finished merge. pollutant_merge.csv created.
+INFO:__main__:dropping columns
+INFO:__main__:Columns dropped
+INFO:__main__:getting rid of outliers
+INFO:__main__:outliers removed.
+INFO:__main__:attempting to split dataset
+INFO:__main__:datasets split into training and testing sets.
+INFO:__main__:attempting to normalize
+INFO:__main__:normalized successfully.
+INFO:__main__:creating linear regression
+INFO:__main__:model trained
