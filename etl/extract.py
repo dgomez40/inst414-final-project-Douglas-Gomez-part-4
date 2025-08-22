@@ -6,6 +6,9 @@ import logging
 logger = logging.getLogger(__name__)
 
 def air_pollutant():
+    """
+    creates raw air pollutant csv of every county from 2024. Cleans to keep only the data from Anne Arundel County.
+    """
     logger.info("creating air_pollutant")
     url = 'https://aqs.epa.gov/aqsweb/airdata/daily_aqi_by_county_2024.zip'
     pm25_raw = pd.read_csv(url)
@@ -19,6 +22,9 @@ def air_pollutant():
 
 
 def weather():
+    """
+    Creates raw weather csv of baltimore county for everyday, every year from 1939. Cleans to only keep the data from the year 2024.
+    """
     logger.info("creating temperature csv")
     url = 'https://www.ncei.noaa.gov/data/daily-summaries/access/USW00093721.csv'
     temperature_raw = pd.read_csv(url, low_memory=False)
@@ -30,6 +36,10 @@ def weather():
 
 
 def merge():
+    """
+    Merges the two datasets on their matching dates, after making sure that they both have the same number of entries. Since the aqi dataset
+    only goes till October 31st, I also make the temperature dataset go until October 31st as well. This data is from 2024.
+    """
     # Load datasets
     temperature_raw = pd.read_csv("data/pm25_raw.csv")
     pm25_raw = pd.read_csv("data/temperature_raw.csv")
@@ -45,5 +55,4 @@ def merge():
     # # Merge on the date column
     pollutant_merge = pd.merge(temperature_filtered, pm25_raw, on='DATE')
     pollutant_merge.to_csv('data/pollutant_merge.csv')
-
     return pollutant_merge

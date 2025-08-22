@@ -1,4 +1,3 @@
-import mylib
 import logging
 import etl.extract as extract
 import etl.transform as transform
@@ -9,12 +8,13 @@ import vis.visualizations as vis
 logger = logging.getLogger(__name__)
 
 def main():
+        """
+        Runs data pipeline from start to finish.
+        """
         logging.basicConfig(filename='alex.log', level=logging.INFO)
         logger.info('started creating raw CSVs for pm25 and temperature')
         extract.air_pollutant()
         extract.weather()
-        
-        
         logger.info('Finished creating raw CSVs')
         
         
@@ -68,7 +68,10 @@ def main():
         #VISUALIZATION
         logger.info("Creating plot(s)")
         vis.create_linreg_Scatter(y_test,y_pred)
+        vis.create_line(y_test,y_pred)
         logger.info("visualization created successfully.")
+
+
 
 
 

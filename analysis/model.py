@@ -6,6 +6,14 @@ import joblib
 
 
 def train_lin_reg(train_X_scaled, y_train, test_X_scaled, y_test ):
+    """Creates linear regression model
+
+    Args:
+        train_X_scaled (ndarray): Scaled training features  
+        y_train (Series): Training target values  
+        test_X_scaled (ndarray): Scaled test features  
+        y_test (Series): Test target values    
+    """
     lr_model = LinearRegression()
     lr_model.fit(train_X_scaled, y_train)
     y_pred = lr_model.predict(test_X_scaled)

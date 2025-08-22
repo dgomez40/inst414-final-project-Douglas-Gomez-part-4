@@ -1,9 +1,17 @@
 import pandas as pd
-import etl.transform as transform
 import numpy as np
 
 def load_data(X_train_scaled, X_test_scaled, y_train, y_test, y_pred, lr_model):
-    #trained data buddy
+    """Load the test data into the pipeline and creates the train and test data CSV's respectfully.
+
+    Args:
+        X_train_scaled (ndarray): Scaled training features
+        X_test_scaled (ndarray): Scaled test features
+        y_train (Series): Training target values
+        y_test (Series): Test target values
+        y_pred (ndarray): Predicted target values
+        lr_model (LinearRegression): Trained regression model
+    """
     train_data = X_train_scaled.copy()
     train_data['AQI'] = y_train.values.ravel()
     train_data.to_csv('data/train_data.csv')

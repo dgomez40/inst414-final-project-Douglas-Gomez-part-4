@@ -29,6 +29,9 @@ import joblib
 # #not good idea because some observations were not taken leading to msising values and might drop a ton of information
 
 def drop_columns():
+    """
+    Drops unncesessary columns that convulute the database, keeping the things that will make it more understandable in terms of the project.
+    """
     pollutant_merge = extract.merge()
     keep_cols = [
     'DATE', 'NAME',
@@ -47,6 +50,9 @@ def drop_columns():
 #since I am doing linear regression, I think it would be best to remove outliers from the dataset because it would help with training the model
 
 def outliers():
+    """
+    removes outliers from the datasets. removes two rows in specific.
+    """
     #load data
     pollutant_merge = pd.read_csv("data/pollutant_merge.csv")
     # print(pollutant_merge)
@@ -71,6 +77,13 @@ def outliers():
 
 #since linear regression is sensitive to feature scale, I am also going to normalize the data as well.
 def split_into_train_and_test():
+    """
+        Grabs the X and y columns from our dataset.
+
+    Returns:
+        X: independent variable
+        y: dependent variable
+    """
     pollutant_merge = pd.read_csv("data/pollutant_merge.csv")
     column = ['TAVG']
     target_column = ['AQI']
@@ -79,12 +92,33 @@ def split_into_train_and_test():
     return X, y
 
 def split_train_test_data(X, y, test_size=0.2, random_state=1):
+    """
+        splits the dataset into the testing set and the training set.
+
+    Args:
+        X (_type_): independent variable
+        y (_type_): dependent variable
+        test_size (float, optional): _description_. Defaults to 0.2.
+        random_state (int, optional): _description_. Defaults to 1.
+
+    Returns:
+        X_train, X_test, y_train, y_test - used for creating linreg model.
+    """
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=test_size, random_state=random_state
     )
     return X_train, X_test, y_train, y_test
 
 def normalize_features(X_train, X_test):
+    """Normalizes the training and testing dataset using the Standard Scaler library.
+
+    Args:
+        X_train (_type_): training set
+        X_test (_type_): testing set
+
+    Returns:
+        normalized testing and training datasets
+    """
     scaler = StandardScaler()
     train_X_scaled = pd.DataFrame(scaler.fit_transform(X_train), columns=X_train.columns, index=X_train.index)
     test_X_scaled = pd.DataFrame(scaler.transform(X_test), columns=X_test.columns, index=X_test.index)
