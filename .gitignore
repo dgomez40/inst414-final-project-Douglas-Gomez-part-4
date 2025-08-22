@@ -1,6 +1,9 @@
 alex/
 .DS_Store
 data/*.csv
+!data/.gitkeep
 vis/*.png
+!vis/.gitkeep
 *.log
-data/models/linear_regression_model.joblib
+data/models/*
+!data/models/.gitkeep
