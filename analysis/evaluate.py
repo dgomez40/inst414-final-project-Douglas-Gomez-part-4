@@ -20,6 +20,12 @@ def evaluate_model(X_test_scaled, y_test):
     mean_absolute_err = mean_absolute_error(y_test, y_pred)
     root_mean_squared_error = np.sqrt(mean_squared_error(y_test, y_pred))
     r2 = r2_score(y_test, y_pred)
+    metrics = pd.DataFrame({
+    'Mean Absolute Error': [mean_absolute_err],
+    'Root Mean Squared Error': [root_mean_squared_error],
+    'R^2 Score': [r2]
+})
+    metrics.to_csv('data/metrics.csv')
 
     print(f'mean absolute error {mean_absolute_err}')
     print(f'root mean squared error {root_mean_squared_error}')
