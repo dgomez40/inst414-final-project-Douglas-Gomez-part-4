@@ -1,7 +1,0 @@
-INFO:__main__:started creating raw CSVs for pm25 and temperature
-INFO:etl.extract:creating air_pollutant
-INFO:etl.extract:creating temperature csv
-INFO:__main__:Finished creating raw CSVs
-INFO:__main__:starting merge
-INFO:__main__:finished merge. pollutant_merge.csv created.
-INFO:__main__:dropping columns
