@@ -1,0 +1,17 @@
+Column Name,Description,Data Type
+Unnamed: 0,Index column from original CSV,Integer
+DATE,Date of observation,Date
+NAME,Station name/String identifier of the location,String
+PRCP,Precipitation (inches or mm),Float
+SNOW,Snowfall (inches or cm),Float
+SNWD,Snow depth (inches or cm),Float
+TMAX,Maximum temperature (°F or °C),Float
+TMIN,Minimum temperature (°F or °C),Float
+TAVG,Average temperature (°F or °C),Float
+AWND,Average wind speed (mph or m/s),Float
+State Name,Name of the state,String
+county Name,Name of the county,String
+State Code,Numerical code identifying the state,Integer
+County Code,Numerical code identifying the county,Integer
+AQI,Air Quality Index value,Integer
+Category,Air quality category,String
