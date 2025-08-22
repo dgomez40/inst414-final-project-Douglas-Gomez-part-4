@@ -1,0 +1,6 @@
+alex/
+.DS_Store
+data/*.csv
+vis/*.png
+*.log
+data/models/linear_regression_model.joblib
